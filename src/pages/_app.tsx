@@ -1,14 +1,19 @@
 import { type AppType } from "next/dist/shared/lib/utils";
 import Header from "~/components/Header";
+import Nav from "~/components/Nav";
+import { AppContextProvider } from "~/context/AppContext";
 
 import "~/styles/globals.css";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
-    <div className="absolute inset-0">
-      <Header />
-      <Component {...pageProps} />
-    </div>
+    <AppContextProvider>
+      <div className="absolute inset-0 flex-col">
+        <Header />
+        <Nav />
+        <Component {...pageProps} />
+      </div>
+    </AppContextProvider>
   );
 };
 

@@ -1,11 +1,24 @@
 import Image from "next/image";
+import { useAppContext } from "~/context/AppContext";
 
 const Header = () => {
+  const { toggleNav, navActive } = useAppContext();
+  const iconSize = navActive
+    ? "relative h-[1.125rem] w-[1.125rem] sm:h-[1.375rem] sm:w-[1.375rem]"
+    : "relative h-[0.875rem] w-[1.4375rem] sm:h-[1.125rem] sm:w-[1.875rem]";
+
   return (
-    <header className="flex h-[3.5rem] w-full bg-c3 sm:h-[4.5rem]">
-      <button className="flex h-[3.5rem] w-[3.5rem] items-center justify-center bg-c4 sm:h-[4.5rem] sm:w-[4.5rem]">
-        <div className="relative h-[0.875rem] w-[1.4375rem] sm:h-[1.125rem] sm:w-[1.875rem]">
-          <Image src="svgs/icon-menu.svg" alt="Menu" fill />
+    <header className="absolute left-0 right-0 top-0 z-10 flex h-[3.5rem] bg-c3 sm:h-[4.5rem]">
+      <button
+        className="flex h-[3.5rem] w-[3.5rem] items-center justify-center bg-c4 sm:h-[4.5rem] sm:w-[4.5rem]"
+        onClick={toggleNav}
+      >
+        <div className={iconSize}>
+          <Image
+            src={navActive ? "svgs/icon-close.svg" : "svgs/icon-menu.svg"}
+            alt="Menu"
+            fill
+          />
         </div>
       </button>
       <div className="flex h-full w-full items-center p-[1rem]">
@@ -29,7 +42,7 @@ const Header = () => {
         </button>
         <button
           className="ml-[1.5rem] flex h-[2.5rem] w-[2.5rem] items-center justify-center gap-[0.5rem] rounded-[0.25rem]
-        bg-primaryDark text-white transition-all sm:w-[9.5rem] mouseHover:hover:bg-primaryLight"
+        bg-primaryDark text-medium text-white transition-all sm:w-[9.5rem] mouseHover:hover:bg-primaryLight"
         >
           <div className="relative h-[1rem] w-[1rem]">
             <Image src="svgs/icon-save.svg" alt="Save Changes" fill />
