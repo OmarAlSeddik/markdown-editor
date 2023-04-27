@@ -20,7 +20,7 @@ export default function Document() {
       <link rel="icon" href="favicon.ico" />
       <title>Markdown Editor</title>
       <meta name="description" content="An in-browser markdown editor." />
-      <body className="overflow-hidden font-sans">
+      <body className="select-none overflow-hidden font-sans">
         <Main />
         <NextScript />
       </body>

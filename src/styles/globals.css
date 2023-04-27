@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .iconHover {
+    filter: invert(45%) sepia(23%) saturate(1453%) hue-rotate(326deg)
+      brightness(104%) contrast(94%);
+  }
+  .themeIcon {
+    filter: invert(36%) sepia(13%) saturate(355%) hue-rotate(177deg)
+      brightness(96%) contrast(87%);
+  }
+  .themeIconActive {
+    filter: invert(100%) sepia(93%) saturate(0%) hue-rotate(201deg)
+      brightness(106%) contrast(106%);
+  }
+}

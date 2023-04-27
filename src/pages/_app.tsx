@@ -2,7 +2,6 @@ import { type AppType } from "next/dist/shared/lib/utils";
 import Header from "~/components/Header";
 import Nav from "~/components/Nav";
 import { AppContextProvider } from "~/context/AppContext";
-
 import "~/styles/globals.css";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
