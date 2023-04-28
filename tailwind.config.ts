@@ -39,6 +39,9 @@ export default {
       screens: {
         mouseHover: { raw: "(hover: hover)" },
       },
+      gridTemplateRows: {
+        document: "2.625rem minmax(0, 1fr)",
+      },
     },
   },
   plugins: [],
