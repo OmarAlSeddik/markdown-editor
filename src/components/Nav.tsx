@@ -11,7 +11,9 @@ const Nav = () => {
       } absolute left-0 top-0 flex h-full w-[15.625rem] flex-col gap-[1.5rem]
       overflow-hidden bg-c2 p-[1.5rem] pt-[5rem] transition-all sm:pt-[6rem]`}
     >
-      <h2 className="font-medium tracking-[2px] text-c6">MY DOCUMENTS</h2>
+      <h2 className="text-base font-medium tracking-[2px] text-c6">
+        MY DOCUMENTS
+      </h2>
       <button className="h-[2.5rem] w-[12.625rem] rounded-[0.25rem] bg-primaryDark text-medium text-white transition-all mouseHover:hover:bg-primaryLight">
         + New Document
       </button>

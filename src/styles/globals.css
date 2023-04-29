@@ -15,4 +15,26 @@
     filter: invert(100%) sepia(93%) saturate(0%) hue-rotate(201deg)
       brightness(106%) contrast(106%);
   }
+
+  h1 {
+    @apply text-h1 font-bold text-c4 dark:text-white;
+  }
+  h2 {
+    @apply text-h2 font-light text-c4 dark:text-white;
+  }
+  h3 {
+    @apply text-h3 font-bold text-c4 dark:text-white;
+  }
+  h4 {
+    @apply text-h4 font-bold text-c4 dark:text-white;
+  }
+  h5 {
+    @apply text-h5 font-bold text-c4 dark:text-white;
+  }
+  h6 {
+    @apply text-h6 font-bold text-primaryDark;
+  }
+  a {
+    @apply underline hover:underline mouseHover:hover:text-primaryDark;
+  }
 }
