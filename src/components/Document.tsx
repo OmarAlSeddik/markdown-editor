@@ -1,10 +1,14 @@
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import SyntaxHighlighter from "react-syntax-highlighter";
+import {
+  a11yDark,
+  a11yLight,
+} from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import { useAppContext } from "~/context/AppContext";
 
 const Document = () => {
-  const { navActive } = useAppContext();
+  const { navActive, darkTheme } = useAppContext();
   const [input, setInput] = useState("");
 
   return (
@@ -30,35 +34,37 @@ const Document = () => {
       <div className="select-text px-[1rem] py-[0.5rem] font-serif text-c6 dark:bg-c1 dark:text-c7">
         <ReactMarkdown
           components={{
-            blockquote: ({ ...props }) => (
+            blockquote: ({ children }) => (
               <div className="rounded-[0.25rem] border-l-[0.25rem] border-primaryDark bg-c9 p-[1.5rem] dark:bg-c3">
-                {props.children}
+                {children}
               </div>
             ),
-            code: ({ inline, lang, ...props }) =>
-              inline ? (
-                <span className="text-c4 dark:text-white">
-                  {props.children}
-                </span>
-              ) : (
+            code: ({ inline, className, children }) => {
+              const match = /language-(\w+)/.exec(className || "");
+              return !inline && match ? (
                 <SyntaxHighlighter
-                  language={lang}
-                  className="rounded-[0.25rem] bg-c9 p-[1.5rem] text-c4 dark:bg-c3 dark:text-white"
+                  style={darkTheme ? a11yDark : a11yLight}
+                  customStyle={{
+                    background: darkTheme ? "#2B2D31" : "#F5F5F5",
+                  }}
+                  language={match[1]}
+                  className="rounded-[0.25rem] bg-c9 p-[1.5rem] dark:bg-c3"
                 >
-                  {props.children}
+                  {String(children).replace(/\n$/, "")}
                 </SyntaxHighlighter>
-              ),
-            ul: ({ ...props }) => (
+              ) : (
+                <span className="text-c4 dark:text-white">{children}</span>
+              );
+            },
+            ul: ({ children }) => (
               <ul className="ml-[3rem] list-disc marker:text-primaryDark">
-                {props.children}
+                {children}
               </ul>
             ),
-            ol: ({ ...props }) => (
-              <ol className="ml-[3rem] list-decimal">{props.children}</ol>
+            ol: ({ children }) => (
+              <ol className="ml-[3rem] list-decimal">{children}</ol>
             ),
-            li: ({ ...props }) => (
-              <li className="pl-[0.5rem]">{props.children}</li>
-            ),
+            li: ({ children }) => <li className="pl-[0.5rem]">{children}</li>,
           }}
         >
           {input}

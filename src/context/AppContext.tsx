@@ -3,6 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 type ContextType = {
   isMobile: boolean;
   navActive: boolean;
+  darkTheme: boolean | undefined;
   toggleNav: () => void;
   toggleTheme: () => void;
 };
@@ -10,6 +11,7 @@ type ContextType = {
 const defaultState = {
   isMobile: false,
   navActive: false,
+  darkTheme: false,
   toggleNav: function () {
     return;
   },
@@ -58,7 +60,7 @@ export const AppContextProvider = ({ children }: PropsType) => {
 
   return (
     <AppContext.Provider
-      value={{ isMobile, toggleTheme, navActive, toggleNav }}
+      value={{ isMobile, darkTheme, toggleTheme, navActive, toggleNav }}
     >
       {children}
     </AppContext.Provider>
