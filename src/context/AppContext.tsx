@@ -3,16 +3,22 @@ import { createContext, useContext, useEffect, useState } from "react";
 type ContextType = {
   isMobile: boolean;
   navActive: boolean;
+  previewActive: boolean;
   darkTheme: boolean | undefined;
   toggleNav: () => void;
+  togglePreview: () => void;
   toggleTheme: () => void;
 };
 
 const defaultState = {
   isMobile: false,
   navActive: false,
+  previewActive: false,
   darkTheme: false,
   toggleNav: function () {
+    return;
+  },
+  togglePreview: function () {
     return;
   },
   toggleTheme: function () {
@@ -28,12 +34,17 @@ type PropsType = {
 
 export const AppContextProvider = ({ children }: PropsType) => {
   const [navActive, setNavActive] = useState(false);
+  const [previewActive, setPreviewActive] = useState(false);
   const [darkTheme, setDarkTheme] = useState<boolean | undefined>();
   const isMobile =
     typeof window !== "undefined" ? window.innerWidth < 640 : false;
 
   const toggleNav = () => {
     setNavActive((prev) => !prev);
+  };
+
+  const togglePreview = () => {
+    setPreviewActive((prev) => !prev);
   };
 
   useEffect(() => {
@@ -60,7 +71,15 @@ export const AppContextProvider = ({ children }: PropsType) => {
 
   return (
     <AppContext.Provider
-      value={{ isMobile, darkTheme, toggleTheme, navActive, toggleNav }}
+      value={{
+        isMobile,
+        darkTheme,
+        toggleTheme,
+        navActive,
+        toggleNav,
+        previewActive,
+        togglePreview,
+      }}
     >
       {children}
     </AppContext.Provider>

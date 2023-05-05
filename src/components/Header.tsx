@@ -96,9 +96,13 @@ const Header = () => {
         bg-primaryDark text-medium text-white transition-all sm:w-[9.5rem] mouseHover:hover:bg-primaryLight"
           onClick={handleClick}
         >
-          {user && (
+          {user ? (
             <div className="relative h-[1rem] w-[1rem]">
               <Image src="svgs/icon-save.svg" alt="Save Changes" fill />
+            </div>
+          ) : (
+            <div className="relative h-[1rem] w-[1rem]">
+              <Image src="svgs/icon-document.svg" alt="Log In" fill />
             </div>
           )}
           <p className="hidden sm:block">{user ? "Save Changes" : "Log In"}</p>

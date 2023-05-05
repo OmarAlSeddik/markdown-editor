@@ -6,6 +6,7 @@ import {
   a11yLight,
 } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import { useAppContext } from "~/context/AppContext";
+import DocHeader from "./DocHeader";
 
 const Document = () => {
   const { navActive, darkTheme } = useAppContext();
@@ -17,12 +18,7 @@ const Document = () => {
         navActive ? "ml-[15.625rem]" : "ml-0"
       } absolute inset-0 mt-[3.5rem] grid min-w-full grid-cols-2 grid-rows-document transition-all sm:mt-[4.5rem]`}
     >
-      <div className="flex items-center border-r border-c8 bg-c9 px-[1rem] py-[0.75rem] font-medium tracking-[2px] text-c6 dark:border-c5 dark:bg-c2 dark:text-c7">
-        MARKDOWN
-      </div>
-      <div className="flex items-center bg-c9 px-[1rem] py-[0.75rem] font-medium tracking-[2px] text-c6 dark:bg-c2 dark:text-c7">
-        PREVIEW
-      </div>
+      <DocHeader />
       <div className="border-r border-c8 px-[1rem] py-[0.5rem] text-c4 dark:border-c5 dark:bg-c1 dark:text-c7">
         <textarea
           name="markdown"
