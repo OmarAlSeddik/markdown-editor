@@ -76,7 +76,7 @@ const Header = () => {
           <div className="relative h-[1rem] w-[0.875rem]">
             <Image src="svgs/icon-document.svg" alt="Document" fill />
           </div>
-          <div className="flex w-[10rem] flex-col overflow-hidden sm:w-[25rem]">
+          <div className="flex w-[10rem] flex-col sm:w-[25rem]">
             <h2 className="hidden text-small font-light text-c6 sm:block">
               Document Name
             </h2>
@@ -101,8 +101,8 @@ const Header = () => {
               <Image src="svgs/icon-save.svg" alt="Save Changes" fill />
             </div>
           ) : (
-            <div className="relative h-[1rem] w-[1rem]">
-              <Image src="svgs/icon-document.svg" alt="Log In" fill />
+            <div className="loginIcon relative h-[1rem] w-[1rem]">
+              <Image src="svgs/icon-login.svg" alt="Log In" fill />
             </div>
           )}
           <p className="hidden sm:block">{user ? "Save Changes" : "Log In"}</p>
