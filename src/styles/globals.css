@@ -20,6 +20,40 @@
       brightness(106%) contrast(106%);
   }
 
+  .lightScrollbar {
+    overflow: auto;
+  }
+
+  .lightScrollbar::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  .lightScrollbar::-webkit-scrollbar-track {
+    background: #f5f5f5;
+  }
+
+  .lightScrollbar::-webkit-scrollbar-thumb {
+    background: #7c8187;
+    border-radius: 10rem;
+  }
+
+  .darkScrollbar {
+    overflow: auto;
+  }
+
+  .darkScrollbar::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  .darkScrollbar::-webkit-scrollbar-track {
+    background: #1d1f22;
+  }
+
+  .darkScrollbar::-webkit-scrollbar-thumb {
+    background: #c1c4cb;
+    border-radius: 10rem;
+  }
+
   h1 {
     @apply text-h1 font-bold text-c4 dark:text-white;
   }

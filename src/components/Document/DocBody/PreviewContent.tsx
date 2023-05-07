@@ -11,7 +11,7 @@ const PreviewContent = ({ input }: { input: string }) => {
 
   return (
     <ReactMarkdown
-      className="mx-auto max-w-[42rem]"
+      className="mx-auto flex max-w-[42rem] flex-col gap-[1.25rem] text-[0.875rem]"
       components={{
         blockquote: ({ children }) => (
           <div className="rounded-[0.25rem] border-l-[0.25rem] border-primaryDark bg-c9 p-[1.5rem] dark:bg-c3">
