@@ -77,7 +77,7 @@ const Header = () => {
             <Image src="svgs/icon-document.svg" alt="Document" fill />
           </div>
           <div className="flex w-[10rem] flex-col sm:w-[25rem]">
-            <h2 className="hidden text-small font-light text-c6 sm:block">
+            <h2 className="hidden text-small font-light text-c7 dark:text-c7 sm:block">
               Document Name
             </h2>
             {input}

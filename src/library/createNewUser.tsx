@@ -9,6 +9,7 @@ const createNewUser = async (uid: string | null | undefined) => {
   if (!docSnap.exists()) {
     void setDoc(userRef, {
       uid,
+      documents: [],
     });
   }
 };
