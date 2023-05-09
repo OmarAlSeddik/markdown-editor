@@ -4,10 +4,10 @@ import { db } from "~/firebase";
 const createNewUser = async (uid: string | null | undefined) => {
   if (!uid) return;
   const id = uid.slice(0, 10);
-  const userRef = doc(db, "users", id);
-  const docSnap = await getDoc(userRef);
+  const userDoc = doc(db, "users", id);
+  const docSnap = await getDoc(userDoc);
   if (!docSnap.exists()) {
-    void setDoc(userRef, {
+    void setDoc(userDoc, {
       uid,
       documents: [],
     });

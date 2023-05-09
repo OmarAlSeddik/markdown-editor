@@ -1,26 +1,14 @@
 import Image from "next/image";
 import { useState } from "react";
-import { useAuthState, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { useAppContext } from "~/context/AppContext";
-import { auth } from "~/firebase";
-import createNewUser from "~/library/createNewUser";
 
 const Header = () => {
-  const [user] = useAuthState(auth);
-  const [signInWithGoogle] = useSignInWithGoogle(auth);
-
   const { toggleNav, navActive, isMobile } = useAppContext();
   const [inputActive, setInputActive] = useState(false);
   const [documentName, setDocumentName] = useState("welcome.md");
   const iconSize = navActive
     ? "relative h-[1.125rem] w-[1.125rem] sm:h-[1.375rem] sm:w-[1.375rem]"
     : "relative h-[0.875rem] w-[1.4375rem] sm:h-[1.125rem] sm:w-[1.875rem]";
-
-  const handleClick = async () => {
-    const response = await signInWithGoogle();
-    const user = response?.user;
-    void createNewUser(user?.uid);
-  };
 
   const toggleInput = () => setInputActive((prev) => !prev);
 
@@ -94,18 +82,11 @@ const Header = () => {
         <button
           className="ml-[1.5rem] flex h-[2.5rem] w-[2.5rem] items-center justify-center gap-[0.5rem] rounded-[0.25rem]
         bg-primaryDark text-medium text-white transition-all sm:w-[9.5rem] mouseHover:hover:bg-primaryLight"
-          onClick={handleClick}
         >
-          {user ? (
-            <div className="relative h-[1rem] w-[1rem]">
-              <Image src="svgs/icon-save.svg" alt="Save Changes" fill />
-            </div>
-          ) : (
-            <div className="loginIcon relative h-[1rem] w-[1rem]">
-              <Image src="svgs/icon-login.svg" alt="Log In" fill />
-            </div>
-          )}
-          <p className="hidden sm:block">{user ? "Save Changes" : "Log In"}</p>
+          <div className="relative h-[1rem] w-[1rem]">
+            <Image src="svgs/icon-save.svg" alt="Save Changes" fill />
+          </div>
+          <p className="hidden sm:block">Save Changes</p>
         </button>
       </div>
     </header>
