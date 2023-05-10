@@ -1,27 +1,12 @@
 import Image from "next/image";
-import {
-  useAuthState,
-  useSignInWithGoogle,
-  useSignOut,
-} from "react-firebase-hooks/auth";
 import { useAppContext } from "~/context/AppContext";
-import { auth } from "~/firebase";
-import createNewUser from "~/library/createNewUser";
+import useAuth from "~/hooks/useAuth";
+import useUser from "~/hooks/useUser";
 
 const NavFooter = () => {
   const { toggleTheme } = useAppContext();
-  const [user] = useAuthState(auth);
-  const [signInWithGoogle] = useSignInWithGoogle(auth);
-  const [signOut] = useSignOut(auth);
-
-  const handleClick = async () => {
-    if (user) await signOut();
-    else {
-      const response = await signInWithGoogle();
-      const signingUser = response?.user;
-      await createNewUser(signingUser?.uid);
-    }
-  };
+  const authX = useAuth();
+  const user = useUser();
 
   return (
     <div className="mt-auto flex items-center gap-[0.625rem]">
@@ -48,12 +33,12 @@ const NavFooter = () => {
       <button
         className="ml-auto flex h-[2rem] w-[5.5rem] items-center justify-center gap-[0.25rem] rounded-[0.25rem]
         bg-primaryDark text-medium text-white transition-all mouseHover:hover:bg-primaryLight"
-        onClick={() => void handleClick()}
+        onClick={() => void authX()}
       >
         <div className="loginIcon relative h-[1rem] w-[1rem]">
           <Image src="svgs/icon-login.svg" alt="Log Out" fill />
         </div>
-        <p className="hidden sm:block">{user ? "Log Out" : "Log In"}</p>
+        <p className="hidden sm:block">{user.uid ? "Log Out" : "Log In"}</p>
       </button>
     </div>
   );
