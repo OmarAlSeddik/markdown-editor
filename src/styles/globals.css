@@ -7,6 +7,9 @@
     filter: invert(45%) sepia(23%) saturate(1453%) hue-rotate(326deg)
       brightness(104%) contrast(94%);
   }
+  .iconHoverDisabled {
+    filter: none;
+  }
   .loginIcon {
     filter: invert(95%) sepia(95%) saturate(0%) hue-rotate(200deg)
       brightness(105%) contrast(105%);

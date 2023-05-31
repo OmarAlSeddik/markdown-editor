@@ -1,8 +1,10 @@
 import Image from "next/image";
 import { useState } from "react";
 import { useAppContext } from "~/context/AppContext";
+import useUser from "~/hooks/useUser";
 
 const Header = () => {
+  const { uid } = useUser();
   const { toggleNav, navActive, isMobile } = useAppContext();
   const [inputActive, setInputActive] = useState(false);
   const [documentName, setDocumentName] = useState("welcome.md");
@@ -71,17 +73,23 @@ const Header = () => {
             {input}
           </div>
         </div>
-        <button className="relative ml-auto h-[1.25rem] w-[1.125rem]">
+        <button
+          className="group relative ml-auto h-[1.25rem] w-[1.125rem]"
+          disabled={!uid}
+        >
           <Image
             src="svgs/icon-delete.svg"
             alt="Delete"
             fill
-            className="mouseHover:hover:iconHover transition-all"
+            className="mouseHover:group-hover:iconHover
+            mouseHover:group-disabled:group-hover:iconHoverDisabled transition-all"
           />
         </button>
         <button
           className="ml-[1.5rem] flex h-[2.5rem] w-[2.5rem] items-center justify-center gap-[0.5rem] rounded-[0.25rem]
-        bg-primaryDark text-medium text-white transition-all sm:w-[9.5rem] mouseHover:hover:bg-primaryLight"
+        bg-primaryDark text-medium text-white transition-all disabled:bg-c1 sm:w-[9.5rem]
+        mouseHover:hover:bg-primaryLight mouseHover:disabled:hover:bg-c1"
+          disabled={!uid}
         >
           <div className="relative h-[1rem] w-[1rem]">
             <Image src="svgs/icon-save.svg" alt="Save Changes" fill />

@@ -1,7 +1,7 @@
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 import { auth, db, doc } from "~/firebase";
-import { type User } from "~/types";
+import { type User } from "~/library/types";
 
 const useUser = () => {
   const [authUser, loadingLoggedInUser] = useAuthState(auth);

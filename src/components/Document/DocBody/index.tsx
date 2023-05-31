@@ -1,10 +1,28 @@
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import Loading from "~/components/Loading";
 import { useAppContext } from "~/context/AppContext";
+import useUser from "~/hooks/useUser";
+import welcomeDocument from "~/library/welcomeDocument";
 import PreviewContent from "./PreviewContent";
 
 const DocBody = () => {
   const { previewActive } = useAppContext();
-  const [input, setInput] = useState("");
+  const { documents, loading } = useUser();
+  const router = useRouter();
+  const [input, setInput] = useState(welcomeDocument.content);
+
+  useEffect(() => {
+    if (documents) {
+      for (const document of documents) {
+        if (document.id == router.asPath.slice(1)) {
+          setInput(document.content);
+        }
+      }
+    }
+  }, [documents, router.asPath]);
+
+  if (loading) return <Loading />;
 
   return (
     <>
@@ -13,10 +31,12 @@ const DocBody = () => {
   ${previewActive ? "hidden" : ""}`}
       >
         <textarea
+          autoFocus
           name="markdown"
           id="markdown"
           className="lightScrollbar dark:darkScrollbar h-full w-full resize-none bg-inherit px-[1rem] py-[0.5rem] font-mono caret-primaryDark outline-none"
           onChange={(event) => setInput(event.target.value)}
+          value={input}
         />
       </div>
       <div

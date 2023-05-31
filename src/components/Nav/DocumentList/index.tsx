@@ -6,8 +6,14 @@ const DocumentList = () => {
 
   return (
     <div className="flex flex-col gap-[1.625rem]">
-      {user.documents?.map((document, index) => (
-        <DocumentItem date={document.date} name={document.name} key={index} />
+      {user.documents?.map((document) => (
+        <DocumentItem
+          key={document.id}
+          id={document.id}
+          date={document.date}
+          name={document.name}
+          content={document.content}
+        />
       ))}
     </div>
   );
