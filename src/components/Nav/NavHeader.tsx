@@ -1,16 +1,8 @@
-import dayjs from "dayjs";
 import useUser from "~/hooks/useUser";
 import createNewDocument from "~/library/createNewDocument";
 
 const NavHeader = () => {
   const { loading, uid } = useUser();
-
-  const newDocument = {
-    id: Date.now(),
-    name: "Untitled",
-    date: dayjs().format("DD MMMM YYYY h:mm A"),
-    content: `# Edit Me!`,
-  };
 
   return (
     <>
@@ -20,7 +12,7 @@ const NavHeader = () => {
       <button
         className="h-[2.5rem] w-[12.625rem] rounded-[0.25rem] bg-primaryDark text-medium
       text-white transition-all disabled:bg-c1 mouseHover:hover:bg-primaryLight mouseHover:disabled:hover:bg-c1"
-        onClick={() => void createNewDocument(uid, newDocument)}
+        onClick={() => void createNewDocument(uid)}
         disabled={!uid}
       >
         {loading ? "Loading..." : "+ New Document"}

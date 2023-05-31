@@ -14,11 +14,8 @@ const DocBody = () => {
 
   useEffect(() => {
     if (documents) {
-      for (const document of documents) {
-        if (document.id == router.asPath.slice(1)) {
-          setInput(document.content);
-        }
-      }
+      const documentId = parseInt(router.asPath.slice(1));
+      if (documents[documentId]) setInput(documents[documentId].content);
     }
   }, [documents, router.asPath]);
 

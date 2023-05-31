@@ -1,7 +1,8 @@
 type Document = {
   id: number;
+  dateNum: number;
+  dateStr: string;
   name: string;
-  date: string;
   content: string;
 };
 

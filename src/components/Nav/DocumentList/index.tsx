@@ -1,20 +1,32 @@
+import Loading from "~/components/Loading";
 import useUser from "~/hooks/useUser";
+import { type Document } from "~/library/types";
 import DocumentItem from "./DocumentItem";
 
 const DocumentList = () => {
-  const user = useUser();
+  const { documents, loading } = useUser();
+
+  if (loading) return <Loading />;
+
+  let documentsList: Document[] = [];
+
+  if (documents)
+    documentsList = Object.values(documents).sort(
+      (a, b) => b.dateNum - a.dateNum
+    );
 
   return (
-    <div className="flex flex-col gap-[1.625rem]">
-      {user.documents?.map((document) => (
-        <DocumentItem
-          key={document.id}
-          id={document.id}
-          date={document.date}
-          name={document.name}
-          content={document.content}
-        />
-      ))}
+    <div className="darkScrollbar flex h-full flex-col gap-[1.625rem]">
+      {documentsList.map((document) => {
+        return (
+          <DocumentItem
+            key={document.id}
+            id={document.id}
+            dateStr={document.dateStr}
+            name={document.name}
+          />
+        );
+      })}
     </div>
   );
 };

@@ -6,10 +6,11 @@ const createNewUser = async (uid: string | null | undefined) => {
   if (!uid) return;
   const userDoc = doc(db, "users", uid);
   const docSnap = await getDoc(userDoc);
+
   if (!docSnap.exists()) {
     void setDoc(userDoc, {
       uid,
-      documents: [welcomeDocument],
+      documents: {},
     });
   }
 };

@@ -8,11 +8,12 @@ import { auth } from "~/firebase";
 
 const DirectPage: NextPage = () => {
   const router = useRouter();
-  const [user, loading] = useAuthState(auth);
+  const [user, documents, loading] = useAuthState(auth);
 
   useEffect(() => {
-    if (!user && !loading) void router.replace("/auth");
-  }, [loading, router, user]);
+    if (!user && !documents[router.asPath] && !loading)
+      void router.replace("/");
+  }, [documents, loading, router, user]);
 
   if (loading) return <Loading />;
 

@@ -1,9 +1,10 @@
 import dayjs from "dayjs";
 
 const welcomeDocument = {
-  id: Date.now(),
-  name: "welcome",
-  date: dayjs().format("DD MMMM YYYY h:mm A"),
+  id: 1000000000000,
+  dateNum: 1000000000000,
+  dateStr: dayjs().format("DD MMMM YYYY h:mm A"),
+  name: "Welcome",
   content: `# Welcome to Markdown
 
 Markdown is a lightweight markup language that you can use to add formatting elements to plaintext text documents.
