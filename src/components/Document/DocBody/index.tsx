@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Loading from "~/components/Loading";
 import { useAppContext } from "~/context/AppContext";
 import useUser from "~/hooks/useUser";
@@ -7,17 +7,24 @@ import welcomeDocument from "~/library/welcomeDocument";
 import PreviewContent from "./PreviewContent";
 
 const DocBody = () => {
-  const { previewActive } = useAppContext();
+  const { previewActive, documentContent, changeDocumentContent } =
+    useAppContext();
   const { documents, loading } = useUser();
   const router = useRouter();
-  const [input, setInput] = useState(welcomeDocument.content);
+  const documentId = parseInt(router.asPath.slice(1));
+
+  useEffect(() => {
+    if (router.route === "/") changeDocumentContent(welcomeDocument.content);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.route]);
 
   useEffect(() => {
     if (documents) {
-      const documentId = parseInt(router.asPath.slice(1));
-      if (documents[documentId]) setInput(documents[documentId].content);
+      if (documents[documentId])
+        await changeDocumentContent(documents[documentId].content);
     }
-  }, [documents, router.asPath]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.asPath]);
 
   if (loading) return <Loading />;
 
@@ -32,8 +39,8 @@ const DocBody = () => {
           name="markdown"
           id="markdown"
           className="lightScrollbar dark:darkScrollbar h-full w-full resize-none bg-inherit px-[1rem] py-[0.5rem] font-mono caret-primaryDark outline-none"
-          onChange={(event) => setInput(event.target.value)}
-          value={input}
+          onChange={(event) => changeDocumentContent(event.target.value)}
+          value={documentContent}
         />
       </div>
       <div
@@ -41,7 +48,7 @@ const DocBody = () => {
           previewActive ? "col-span-full" : "hidden lg:col-span-1 lg:block"
         }`}
       >
-        <PreviewContent input={input} />
+        <PreviewContent input={documentContent} />
       </div>
     </>
   );

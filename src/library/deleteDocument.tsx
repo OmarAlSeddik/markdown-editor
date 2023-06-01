@@ -14,7 +14,7 @@ const deleteDocument = async (
   } = docSnap.data().documents;
 
   if (docSnap.exists()) {
-    void updateDoc(userDoc, {
+    await updateDoc(userDoc, {
       documents: newDocuments,
     });
   }

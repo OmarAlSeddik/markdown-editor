@@ -1,6 +1,5 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "~/firebase";
-import welcomeDocument from "./welcomeDocument";
 
 const createNewUser = async (uid: string | null | undefined) => {
   if (!uid) return;
@@ -8,7 +7,7 @@ const createNewUser = async (uid: string | null | undefined) => {
   const docSnap = await getDoc(userDoc);
 
   if (!docSnap.exists()) {
-    void setDoc(userDoc, {
+    await setDoc(userDoc, {
       uid,
       documents: {},
     });

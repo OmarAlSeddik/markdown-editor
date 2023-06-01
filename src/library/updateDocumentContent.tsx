@@ -1,14 +1,15 @@
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "~/firebase";
 
-const updateDocumentName = async (
+const updateDocumentContent = async (
   uid: string | null | undefined,
   documentId: number,
-  newName: string
+  newContent: string
 ) => {
   if (!uid) return;
   const userDoc = doc(db, "users", uid);
   const docSnap = await getDoc(userDoc);
+  console.log("updated!");
 
   if (docSnap.exists()) {
     await updateDoc(userDoc, {
@@ -16,11 +17,12 @@ const updateDocumentName = async (
         ...docSnap.data().documents,
         [documentId]: {
           ...docSnap.data().documents[documentId],
-          name: newName,
+          content: newContent,
+          dateNum: Date.now(),
         },
       },
     });
   }
 };
 
-export default updateDocumentName;
+export default updateDocumentContent;

@@ -5,6 +5,8 @@ type ContextType = {
   navActive: boolean;
   previewActive: boolean;
   darkTheme: boolean | undefined;
+  documentContent: string;
+  changeDocumentContent: (newContent: string) => void;
   toggleNav: () => void;
   togglePreview: () => void;
   toggleTheme: () => void;
@@ -15,6 +17,10 @@ const defaultState = {
   navActive: false,
   previewActive: false,
   darkTheme: false,
+  documentContent: "",
+  changeDocumentContent: function () {
+    return;
+  },
   toggleNav: function () {
     return;
   },
@@ -33,11 +39,16 @@ type PropsType = {
 };
 
 export const AppContextProvider = ({ children }: PropsType) => {
+  const [documentContent, setDocumentContent] = useState("");
   const [navActive, setNavActive] = useState(false);
   const [previewActive, setPreviewActive] = useState(false);
   const [darkTheme, setDarkTheme] = useState<boolean | undefined>();
   const isMobile =
     typeof window !== "undefined" ? window.innerWidth < 640 : false;
+
+  const changeDocumentContent = (newContent: string) => {
+    setDocumentContent(newContent);
+  };
 
   const toggleNav = () => {
     setNavActive((prev) => !prev);
@@ -72,6 +83,8 @@ export const AppContextProvider = ({ children }: PropsType) => {
   return (
     <AppContext.Provider
       value={{
+        documentContent,
+        changeDocumentContent,
         isMobile,
         darkTheme,
         toggleTheme,

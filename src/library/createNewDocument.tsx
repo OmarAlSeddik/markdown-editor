@@ -16,7 +16,7 @@ const createNewDocument = async (uid: string | null | undefined) => {
   };
 
   if (docSnap.exists())
-    void updateDoc(userDoc, {
+    await updateDoc(userDoc, {
       documents: { ...docSnap.data().documents, [newDocument.id]: newDocument },
     });
 };

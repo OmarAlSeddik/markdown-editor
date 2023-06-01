@@ -1,32 +1,42 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAppContext } from "~/context/AppContext";
 import useUser from "~/hooks/useUser";
 import updateDocumentName from "~/library/updateDocumentName";
-import welcomeDocument from "~/library/welcomeDocument";
 import Loading from "../Loading";
+import welcomeDocument from "~/library/welcomeDocument";
 
 const DocumentNameDisplay = () => {
   const { uid, documents, loading } = useUser();
   const { isMobile } = useAppContext();
   const router = useRouter();
   const [inputActive, setInputActive] = useState(false);
-  const [documentName, setDocumentName] = useState(welcomeDocument.name);
+  const documentName = useRef("");
+  const documentId = parseInt(router.asPath.slice(1));
   const toggleInput = () => setInputActive((prev) => !prev);
 
   useEffect(() => {
     if (documents) {
-      const documentId = parseInt(router.asPath.slice(1));
-      if (documents[documentId]) setDocumentName(documents[documentId].name);
+      if (documents[documentId]) {
+        documentName.current = documents[documentId].name;
+      }
     }
-  }, [documents, router.asPath]);
+  }, [documentId, documents]);
 
   useEffect(() => {
-    if (router.route === "/") setDocumentName("Welcome");
+    if (router.route === "/") documentName.current = welcomeDocument.name;
   }, [router.route]);
 
   if (loading) return <Loading />;
+
+  const handleNameChange = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter" && (event.target as HTMLInputElement).value) {
+      toggleInput();
+      documentName.current = (event.target as HTMLInputElement).value;
+      void updateDocumentName(uid, documentId, documentName.current);
+    }
+  };
 
   const input =
     inputActive && router.route !== "/" ? (
@@ -35,17 +45,7 @@ const DocumentNameDisplay = () => {
         autoFocus
         onBlur={toggleInput}
         className="border-b-[1px] bg-c3 text-medium text-white caret-primaryDark outline-none"
-        onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => {
-          if (
-            event.key === "Enter" &&
-            (event.target as HTMLInputElement).value
-          ) {
-            toggleInput();
-            setDocumentName((event.target as HTMLInputElement).value);
-            const documentId = parseInt(router.asPath.slice(1));
-            void updateDocumentName(uid, documents[documentId], documentName);
-          }
-        }}
+        onKeyDown={(e) => void handleNameChange(e)}
       />
     ) : (
       <h2
@@ -55,12 +55,12 @@ const DocumentNameDisplay = () => {
         onClick={toggleInput}
       >
         {isMobile
-          ? documentName.length > 22
-            ? documentName.slice(0, 20) + "..."
-            : documentName
-          : documentName.length > 52
-          ? documentName.slice(0, 50) + "..."
-          : documentName}
+          ? documentName.current.length > 22
+            ? documentName.current.slice(0, 20) + "..."
+            : documentName.current
+          : documentName.current.length > 52
+          ? documentName.current.slice(0, 50) + "..."
+          : documentName.current}
       </h2>
     );
 

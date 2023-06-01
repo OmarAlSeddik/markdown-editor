@@ -4,8 +4,12 @@ const welcomeDocument = {
   id: 1000000000000,
   dateNum: 1000000000000,
   dateStr: dayjs().format("DD MMMM YYYY h:mm A"),
-  name: "Welcome",
-  content: `# Welcome to Markdown
+  name: "Welcome!",
+  content: `# !!! IMPORTANT !!!
+
+###### Logging in is required for creating files and saving changes!
+
+# Welcome to Markdown
 
 Markdown is a lightweight markup language that you can use to add formatting elements to plaintext text documents.
 
@@ -38,7 +42,8 @@ This markdown editor allows for inline-code snippets, like this: \`<p>I'm inline
 <main>
   <h1>This is a larger code block</h1>
 </main>
-\`\`\``,
+\`\`\`
+`,
 };
 
 export default welcomeDocument;
