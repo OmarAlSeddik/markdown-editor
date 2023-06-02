@@ -14,17 +14,11 @@ const DocBody = () => {
   const documentId = parseInt(router.asPath.slice(1));
 
   useEffect(() => {
-    if (router.route === "/") changeDocumentContent(welcomeDocument.content);
+    if (router.asPath === "/") changeDocumentContent(welcomeDocument.content);
+    else if (documents && documents[documentId])
+      changeDocumentContent(documents[documentId].content);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.route]);
-
-  useEffect(() => {
-    if (documents) {
-      if (documents[documentId])
-        await changeDocumentContent(documents[documentId].content);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.asPath]);
+  }, [documentId, router.asPath, documents]);
 
   if (loading) return <Loading />;
 

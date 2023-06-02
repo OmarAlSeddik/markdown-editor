@@ -16,7 +16,7 @@ const DocumentList = () => {
     );
 
   return (
-    <div className="darkScrollbar flex h-full flex-col gap-[1.625rem]">
+    <div className="darkScrollbar flex h-full flex-col gap-[1rem]">
       {documentsList.map((document) => {
         return (
           <DocumentItem

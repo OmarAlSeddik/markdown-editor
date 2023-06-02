@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { useAppContext } from "~/context/AppContext";
 import useUser from "~/hooks/useUser";
 import updateDocumentName from "~/library/updateDocumentName";
-import Loading from "../Loading";
 import welcomeDocument from "~/library/welcomeDocument";
+import Loading from "../Loading";
 
 const DocumentNameDisplay = () => {
   const { uid, documents, loading } = useUser();
@@ -17,11 +17,8 @@ const DocumentNameDisplay = () => {
   const toggleInput = () => setInputActive((prev) => !prev);
 
   useEffect(() => {
-    if (documents) {
-      if (documents[documentId]) {
-        documentName.current = documents[documentId].name;
-      }
-    }
+    if (documents && documents[documentId])
+      documentName.current = documents[documentId].name;
   }, [documentId, documents]);
 
   useEffect(() => {

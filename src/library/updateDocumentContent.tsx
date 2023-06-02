@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "~/firebase";
 
@@ -9,7 +10,6 @@ const updateDocumentContent = async (
   if (!uid) return;
   const userDoc = doc(db, "users", uid);
   const docSnap = await getDoc(userDoc);
-  console.log("updated!");
 
   if (docSnap.exists()) {
     await updateDoc(userDoc, {
@@ -19,6 +19,7 @@ const updateDocumentContent = async (
           ...docSnap.data().documents[documentId],
           content: newContent,
           dateNum: Date.now(),
+          dateStr: dayjs().format("DD MMMM YYYY h:mm A"),
         },
       },
     });

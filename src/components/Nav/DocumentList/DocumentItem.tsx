@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const DocumentItem = ({
   id,
@@ -10,8 +11,15 @@ const DocumentItem = ({
   name: string;
   dateStr: string;
 }) => {
+  const router = useRouter();
+  const active = parseInt(router.asPath.slice(1)) == id;
+
   return (
-    <div className="flex h-[2rem] items-center gap-[1rem]">
+    <Link
+      className={`flex h-[3rem] items-center gap-[1rem] rounded px-[1rem] !no-underline mouseHover:hover:!no-underline
+    ${active ? "bg-c1" : "mouseHover:hover:bg-c3"}`}
+      href={`/${id}`}
+    >
       <div className="relative h-[1rem] w-[0.875rem]">
         <Image src="svgs/icon-document.svg" alt="Document" fill />
       </div>
@@ -19,14 +27,11 @@ const DocumentItem = ({
         <h2 className="text-small font-light text-c6 dark:text-c6">
           {dateStr}
         </h2>
-        <Link
-          className="text-medium text-white transition-all mouseHover:hover:text-primaryDark"
-          href={`/${id}`}
-        >
+        <p className="text-medium text-white transition-all">
           {name.length > 13 ? name.slice(0, 12) + "..." : name}
-        </Link>
+        </p>
       </div>
-    </div>
+    </Link>
   );
 };
 
