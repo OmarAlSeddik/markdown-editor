@@ -1,28 +1,35 @@
-# Create T3 App
+# Connect Four Game
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+This is a solution to Frontend Mentor's [In-browser markdown editor challenge](https://www.frontendmentor.io/challenges/inbrowser-markdown-editor-r16TrrQX9) with bonus added functionality.
 
-## What's next? How do I make an app with this?
+## Links
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+- WIP
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## Features
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+- A fully-functional full-stack markdown editor!
+- Users can create, read, update, and delete files with minimal loading times.
+- Has a light / dark theme functionality that utilizes the local storage.
+- Sleek design. Minor changes to the original has been made to improve the user experience.
+- Fully responsive design.
 
-## Learn More
+## Tech Stack
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+- Next.js
+- TypeScript
+- Tailwind
+- Firebase
+- react-firebase-hooks
+- auto-animate
+- react-markdown
+- react-syntax-highlighter
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+## Desktop Screenshots
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+<p float="left">
+  <img src="public/screenshots/desktop_screenshot_1.png" width="49%" />
+  <img src="public/screenshots/desktop_screenshot_2.png" width="49%" />
+</p>
 
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+## Mobile Screenshots (WIP)
