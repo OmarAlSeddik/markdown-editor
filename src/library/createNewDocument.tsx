@@ -1,11 +1,13 @@
 import dayjs from "dayjs";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "~/firebase";
+import { type User } from "./types";
 
 const createNewDocument = async (uid: string | null | undefined) => {
   if (!uid) return;
   const userDoc = doc(db, "users", uid);
   const docSnap = await getDoc(userDoc);
+  const userData = docSnap.data() as User;
 
   const newDocument = {
     id: Date.now(),
@@ -15,10 +17,11 @@ const createNewDocument = async (uid: string | null | undefined) => {
     content: `# Edit Me!`,
   };
 
-  if (docSnap.exists())
+  if (docSnap.exists()) {
     await updateDoc(userDoc, {
-      documents: { ...docSnap.data().documents, [newDocument.id]: newDocument },
+      documents: { ...userData.documents, [newDocument.id]: newDocument },
     });
+  }
 };
 
 export default createNewDocument;

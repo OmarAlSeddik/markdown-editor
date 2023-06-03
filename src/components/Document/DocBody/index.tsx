@@ -15,11 +15,10 @@ const DocBody = () => {
 
   useEffect(() => {
     if (router.asPath === "/") changeDocumentContent(welcomeDocument.content);
-    else if (documents && documents[documentId]) {
-      changeDocumentContent(documents[documentId].content);
-    }
+    else if (documents && documents[documentId])
+      changeDocumentContent(documents[documentId]?.content);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [documentId, router.asPath, documents]);
+  }, [documentId, documents, router.asPath]);
 
   if (loading) return <Loading />;
 

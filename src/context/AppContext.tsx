@@ -8,8 +8,8 @@ type ContextType = {
   documentName: string;
   documentContent: string;
   saved: boolean;
-  changeDocumentName: (newName: string) => void;
-  changeDocumentContent: (newContent: string) => void;
+  changeDocumentName: (newName: string | undefined) => void;
+  changeDocumentContent: (newContent: string | undefined) => void;
   toggleNav: () => void;
   togglePreview: () => void;
   toggleTheme: () => void;
@@ -64,12 +64,12 @@ export const AppContextProvider = ({ children }: PropsType) => {
     setSaved(state);
   };
 
-  const changeDocumentName = (newName: string) => {
-    setDocumentName(newName);
+  const changeDocumentName = (newName: string | undefined) => {
+    if (newName) setDocumentName(newName);
   };
 
-  const changeDocumentContent = (newContent: string) => {
-    setDocumentContent(newContent);
+  const changeDocumentContent = (newContent: string | undefined) => {
+    if (newContent) setDocumentContent(newContent);
   };
 
   const toggleNav = () => {

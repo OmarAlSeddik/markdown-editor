@@ -3,43 +3,33 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAppContext } from "~/context/AppContext";
 import useUser from "~/hooks/useUser";
-import updateDocumentName from "~/library/updateDocumentName";
 import welcomeDocument from "~/library/welcomeDocument";
 import Loading from "../Loading";
 
 const DocumentNameDisplay = () => {
-  const { uid, documents, loading } = useUser();
-  const { isMobile, documentName, changeDocumentName } = useAppContext();
+  const { isMobile, documentName, changeDocumentName, toggleSaved } =
+    useAppContext();
+  const { documents, loading } = useUser();
   const router = useRouter();
   const [inputActive, setInputActive] = useState(false);
   const documentId = parseInt(router.asPath.slice(1));
   const toggleInput = () => setInputActive((prev) => !prev);
 
-  const [toggleUpdate, setToggleUpdate] = useState(false);
-
   useEffect(() => {
     if (router.asPath === "/") changeDocumentName(welcomeDocument.name);
     else if (documents && documents[documentId])
-      changeDocumentName(documents[documentId].name);
+      changeDocumentName(documents[documentId]?.name);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [documentId, documents, router.asPath]);
-
-  useEffect(() => {
-    if (documents && documents[documentId]) {
-      void updateDocumentName(uid, documentId, documentName);
-      setToggleUpdate(false);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [toggleUpdate]);
 
   if (loading) return <Loading />;
 
   const handleNameChange = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && (event.target as HTMLInputElement).value) {
       toggleInput();
+      toggleSaved(false);
       const newName = (event.target as HTMLInputElement).value;
       changeDocumentName(newName);
-      setToggleUpdate(true);
     }
   };
 

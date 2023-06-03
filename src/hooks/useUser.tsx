@@ -6,13 +6,14 @@ import { type User } from "~/library/types";
 const useUser = () => {
   const [authUser, loadingLoggedInUser] = useAuthState(auth);
   const loggedInUserRef = doc(db, "users", authUser?.uid ?? "placeholder");
-  const [userData, loadingData] = useDocumentData<User>(loggedInUserRef);
+  const [userData, loadingData] = useDocumentData(loggedInUserRef);
   const loading = loadingLoggedInUser || loadingData;
+  const user = userData as User;
 
   return {
     loading,
-    uid: userData?.uid,
-    documents: userData?.documents,
+    uid: user?.uid,
+    documents: user?.documents,
   };
 };
 
