@@ -11,7 +11,7 @@ const DirectPage: NextPage = () => {
   const documentId = parseInt(router.asPath.slice(1));
 
   useEffect(() => {
-    if (!uid && !loading && documents && !documents[documentId])
+    if ((!loading && !uid) || (documents && !documents[documentId]))
       void router.replace("/");
   }, [documentId, documents, loading, router, uid]);
 

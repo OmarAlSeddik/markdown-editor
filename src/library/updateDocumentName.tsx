@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "~/firebase";
 
@@ -17,6 +18,8 @@ const updateDocumentName = async (
         [documentId]: {
           ...docSnap.data().documents[documentId],
           name: newName,
+          dateNum: Date.now(),
+          dateStr: dayjs().format("DD MMMM YYYY h:mm A"),
         },
       },
     });

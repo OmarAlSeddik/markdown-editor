@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppContext } from "~/context/AppContext";
 import useUser from "~/hooks/useUser";
 import updateDocumentName from "~/library/updateDocumentName";
@@ -9,29 +9,37 @@ import Loading from "../Loading";
 
 const DocumentNameDisplay = () => {
   const { uid, documents, loading } = useUser();
-  const { isMobile } = useAppContext();
+  const { isMobile, documentName, changeDocumentName } = useAppContext();
   const router = useRouter();
   const [inputActive, setInputActive] = useState(false);
-  const documentName = useRef("");
   const documentId = parseInt(router.asPath.slice(1));
   const toggleInput = () => setInputActive((prev) => !prev);
 
-  useEffect(() => {
-    if (documents && documents[documentId])
-      documentName.current = documents[documentId].name;
-  }, [documentId, documents]);
+  const [toggleUpdate, setToggleUpdate] = useState(false);
 
   useEffect(() => {
-    if (router.route === "/") documentName.current = welcomeDocument.name;
-  }, [router.route]);
+    if (router.asPath === "/") changeDocumentName(welcomeDocument.name);
+    else if (documents && documents[documentId])
+      changeDocumentName(documents[documentId].name);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [documentId, documents, router.asPath]);
+
+  useEffect(() => {
+    if (documents && documents[documentId]) {
+      void updateDocumentName(uid, documentId, documentName);
+      setToggleUpdate(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [toggleUpdate]);
 
   if (loading) return <Loading />;
 
   const handleNameChange = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && (event.target as HTMLInputElement).value) {
       toggleInput();
-      documentName.current = (event.target as HTMLInputElement).value;
-      void updateDocumentName(uid, documentId, documentName.current);
+      const newName = (event.target as HTMLInputElement).value;
+      changeDocumentName(newName);
+      setToggleUpdate(true);
     }
   };
 
@@ -43,6 +51,7 @@ const DocumentNameDisplay = () => {
         onBlur={toggleInput}
         className="border-b-[1px] bg-c3 text-medium text-white caret-primaryDark outline-none"
         onKeyDown={(e) => void handleNameChange(e)}
+        defaultValue={documentName}
       />
     ) : (
       <h2
@@ -52,12 +61,12 @@ const DocumentNameDisplay = () => {
         onClick={toggleInput}
       >
         {isMobile
-          ? documentName.current.length > 22
-            ? documentName.current.slice(0, 20) + "..."
-            : documentName.current
-          : documentName.current.length > 52
-          ? documentName.current.slice(0, 50) + "..."
-          : documentName.current}
+          ? documentName.length > 13
+            ? documentName.slice(0, 13) + "..."
+            : documentName
+          : documentName.length > 50
+          ? documentName.slice(0, 50) + "..."
+          : documentName}
       </h2>
     );
 

@@ -7,7 +7,7 @@ import welcomeDocument from "~/library/welcomeDocument";
 import PreviewContent from "./PreviewContent";
 
 const DocBody = () => {
-  const { previewActive, documentContent, changeDocumentContent } =
+  const { previewActive, documentContent, changeDocumentContent, toggleSaved } =
     useAppContext();
   const { documents, loading } = useUser();
   const router = useRouter();
@@ -15,8 +15,9 @@ const DocBody = () => {
 
   useEffect(() => {
     if (router.asPath === "/") changeDocumentContent(welcomeDocument.content);
-    else if (documents && documents[documentId])
+    else if (documents && documents[documentId]) {
       changeDocumentContent(documents[documentId].content);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [documentId, router.asPath, documents]);
 
@@ -33,7 +34,10 @@ const DocBody = () => {
           name="markdown"
           id="markdown"
           className="lightScrollbar dark:darkScrollbar h-full w-full resize-none bg-inherit px-[1rem] py-[0.5rem] font-mono caret-primaryDark outline-none"
-          onChange={(event) => changeDocumentContent(event.target.value)}
+          onChange={(event) => {
+            changeDocumentContent(event.target.value);
+            toggleSaved(false);
+          }}
           value={documentContent}
         />
       </div>

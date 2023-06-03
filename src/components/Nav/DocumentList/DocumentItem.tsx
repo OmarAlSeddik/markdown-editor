@@ -16,7 +16,7 @@ const DocumentItem = ({
 
   return (
     <Link
-      className={`flex h-[3rem] items-center gap-[1rem] rounded px-[1rem] !no-underline mouseHover:hover:!no-underline
+      className={`flex h-[3rem] flex-shrink-0 items-center gap-[1rem] rounded px-[0.5rem] !no-underline mouseHover:hover:!no-underline
     ${active ? "bg-c1" : "mouseHover:hover:bg-c3"}`}
       href={`/${id}`}
     >
@@ -28,7 +28,7 @@ const DocumentItem = ({
           {dateStr}
         </h2>
         <p className="text-medium text-white transition-all">
-          {name.length > 13 ? name.slice(0, 12) + "..." : name}
+          {name.length > 9 ? name.slice(0, 9) + "..." : name}
         </p>
       </div>
     </Link>
