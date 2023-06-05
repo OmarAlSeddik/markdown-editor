@@ -55,7 +55,8 @@ const DocBody = () => {
       <div
         className={` col-span-full select-text p-[1.25rem] font-serif text-c6 dark:bg-c1 dark:text-c7
         ${previewActive ? "col-span-full" : "hidden lg:col-span-1 lg:block"}
-        ${loading ? "overflow-hidden" : "lightScrollbar dark:darkScrollbar"}`}
+        ${loading ? "overflow-hidden" : "lightScrollbar dark:darkScrollbar"}
+        ${isMobile && navActive ? "pointer-events-none" : ""}`}
       >
         {loading ? (
           <PreviewSkeleton />
