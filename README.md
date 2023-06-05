@@ -4,8 +4,8 @@ This is a solution to Frontend Mentor's [In-browser markdown editor challenge](h
 
 ## Links
 
-- [Live Link](https://markdown-editor-omaralseddik.vercel.app/)
-- Solution Link (WIP)
+- <a href="https://markdown-editor-omaralseddik.vercel.app/" target="_blank">Live Link</a>
+- <a href="https://www.frontendmentor.io/solutions/fullstack-firebase-nextjs-typescript-tailwind-mPvtlQAti4" target="_blank">Solution Link</a>
 
 ## Features
 
