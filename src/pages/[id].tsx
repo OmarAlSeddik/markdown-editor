@@ -2,7 +2,6 @@ import { type NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import Document from "~/components/Document";
-import Loading from "~/components/Loading";
 import useUser from "~/hooks/useUser";
 
 const DirectPage: NextPage = () => {
@@ -14,8 +13,6 @@ const DirectPage: NextPage = () => {
     if ((!loading && !uid) || (documents && !documents[documentId]))
       void router.replace("/");
   }, [documentId, documents, loading, router, uid]);
-
-  if (loading) return <Loading />;
 
   return <Document />;
 };

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useAppContext } from "~/context/AppContext";
 import useUser from "~/hooks/useUser";
 import welcomeDocument from "~/library/welcomeDocument";
-import Loading from "../Loading";
+import Loading from "../Shared/Loading";
 
 const DocumentNameDisplay = () => {
   const { isMobile, documentName, changeDocumentName, toggleSaved } =
@@ -21,8 +21,6 @@ const DocumentNameDisplay = () => {
       changeDocumentName(documents[documentId]?.name);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [documentId, documents, router.asPath]);
-
-  if (loading) return <Loading />;
 
   const handleNameChange = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && (event.target as HTMLInputElement).value) {
@@ -45,8 +43,10 @@ const DocumentNameDisplay = () => {
       />
     ) : (
       <h2
-        className={`cursor-pointer text-medium text-white transition-all ${
-          router.route !== "/" ? "mouseHover:hover:text-primaryDark" : ""
+        className={`text-medium text-white transition-all ${
+          router.route !== "/"
+            ? "cursor-pointer mouseHover:hover:text-primaryDark"
+            : ""
         }`}
         onClick={toggleInput}
       >
@@ -74,7 +74,7 @@ const DocumentNameDisplay = () => {
           <h2 className="hidden text-small font-light text-c7 dark:text-c7 sm:block">
             Document Name
           </h2>
-          {input}
+          {loading ? <Loading withBg={false} /> : input}
         </div>
       </div>
     </>

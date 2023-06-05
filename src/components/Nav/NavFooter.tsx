@@ -5,8 +5,8 @@ import useUser from "~/hooks/useUser";
 
 const NavFooter = () => {
   const { toggleTheme } = useAppContext();
-  const authX = useAuth();
-  const user = useUser();
+  const auth = useAuth();
+  const { uid, loading } = useUser();
 
   return (
     <div className="mt-auto flex items-center gap-[0.625rem]">
@@ -31,14 +31,16 @@ const NavFooter = () => {
         className="themeIconActive dark:themeIcon transition-all"
       />
       <button
-        className="ml-auto flex h-[2rem] w-[5.5rem] items-center justify-center gap-[0.25rem] rounded-[0.25rem]
-        bg-primaryDark text-medium text-white transition-all mouseHover:hover:bg-primaryLight"
-        onClick={() => void authX()}
+        className="ml-auto flex h-[2rem] w-[5.5rem] items-center justify-center
+        gap-[0.25rem] rounded-[0.25rem] bg-primaryDark text-medium text-white
+        transition-all disabled:bg-c1 mouseHover:hover:bg-primaryLight mouseHover:disabled:hover:bg-c1"
+        onClick={() => void auth()}
+        disabled={loading}
       >
         <div className="loginIcon relative h-[1rem] w-[1rem]">
           <Image src="svgs/icon-login.svg" alt="Log Out" fill />
         </div>
-        <p className="hidden sm:block">{user.uid ? "Log Out" : "Log In"}</p>
+        <p>{loading ? "Loading" : uid ? "Log Out" : "Log In"}</p>
       </button>
     </div>
   );
