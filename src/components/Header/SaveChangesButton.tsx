@@ -20,8 +20,8 @@ const SaveChangesButton = () => {
 
   return (
     <button
-      className={`ml-[1.5rem] flex h-[2.5rem] w-[2.5rem] items-center gap-[0.5rem]
-      rounded-[0.25rem] px-[1rem] text-medium text-white transition-all sm:w-[9.5rem] 
+      className={`ml-[1.5rem] flex h-[2.5rem] w-[2.5rem] items-center justify-center gap-[0.5rem]
+      rounded-[0.25rem] text-medium text-white transition-all sm:w-[9.5rem] sm:justify-start sm:px-[1rem] 
       ${
         saved
           ? "bg-green-500"
