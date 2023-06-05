@@ -4,7 +4,8 @@ This is a solution to Frontend Mentor's [In-browser markdown editor challenge](h
 
 ## Links
 
-- WIP
+- [Live Link](https://markdown-editor-omaralseddik.vercel.app/)
+- Solution Link (WIP)
 
 ## Features
 
@@ -32,4 +33,10 @@ This is a solution to Frontend Mentor's [In-browser markdown editor challenge](h
   <img src="public/screenshots/desktop_screenshot_2.png" width="49%" />
 </p>
 
-## Mobile Screenshots (WIP)
+## Mobile Screenshots
+
+<p float="left">
+  <img src="public/screenshots/mobile_screenshot_1.png" width="32%" />
+  <img src="public/screenshots/mobile_screenshot_2.png" width="32%" />
+  <img src="public/screenshots/mobile_screenshot_3.png" width="32%" />
+</p>
